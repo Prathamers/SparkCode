@@ -63,9 +63,9 @@ npm install
 ```
 
 ### 2. Run the Application
-You can run Sparkcode either in your web browser or as a native desktop window:
+You can run Sparkcode in your web browser:
 
-#### Option A: Run in the Web Browser
+#### Run in the Web Browser
 Start the frontend development server and the backend server:
 
 *   **Start Frontend (Vite)**:
@@ -80,13 +80,7 @@ Start the frontend development server and the backend server:
     ```
     The backend runs on port **3100** (`http://localhost:3100`).
 
-#### Option B: Run as a Native Desktop App (Electron)
-1. Ensure your local dev server is running (`npm run dev`).
-2. Start the desktop window:
-   ```bash
-   npm run electron:dev
-   ```
-
+#
 ### 3. Build Desktop Binaries
 To compile and package Sparkcode into a standalone desktop application (`.exe` on Windows, `.AppImage` on Linux):
 ```bash
