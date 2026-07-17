@@ -50,7 +50,7 @@ To run Sparkcode locally on your machine, follow these instructions:
 
 ### Prerequisites
 Make sure you have [Node.js](https://nodejs.org/) (v18 or higher recommended) and `npm` installed.
-Go over here and download the SparkCode.tz.tar file https://github.com/Prathamers/SparkCode/releases/tag/v0.1.0-alpha
+Go over here and download the SparkCode.tz.tar file https://github.com/Prathamers/SparkCode/releases/tag/v0.1.0-alpha or
 
 ### 1. Clone & Install
 ```bash
