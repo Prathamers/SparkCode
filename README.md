@@ -50,6 +50,7 @@ To run Sparkcode locally on your machine, follow these instructions:
 
 ### Prerequisites
 Make sure you have [Node.js](https://nodejs.org/) (v18 or higher recommended) and `npm` installed.
+Go over here and download the SparkCode.tz.tar file https://github.com/Prathamers/SparkCode/releases/tag/v0.1.0-alpha
 
 ### 1. Clone & Install
 ```bash
@@ -62,19 +63,36 @@ npm install
 ```
 
 ### 2. Run the Application
-You need to run the frontend development server (Vite) and the backend server:
+You can run Sparkcode either in your web browser or as a native desktop window:
 
-#### Start Frontend (Vite)
-```bash
-npm run dev
-```
-By default, the frontend will be served at **[http://localhost:5173](http://localhost:5173)**. Open this link in your web browser.
+#### Option A: Run in the Web Browser
+Start the frontend development server and the backend server:
 
-#### Start Backend (Express Server)
+*   **Start Frontend (Vite)**:
+    ```bash
+    npm run dev
+    ```
+    Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+
+*   **Start Backend (Express Server)**:
+    ```bash
+    npm run server
+    ```
+    The backend runs on port **3100** (`http://localhost:3100`).
+
+#### Option B: Run as a Native Desktop App (Electron)
+1. Ensure your local dev server is running (`npm run dev`).
+2. Start the desktop window:
+   ```bash
+   npm run electron:dev
+   ```
+
+### 3. Build Desktop Binaries
+To compile and package Sparkcode into a standalone desktop application (`.exe` on Windows, `.AppImage` on Linux):
 ```bash
-npm run server
+npm run electron:build
 ```
-The backend server runs on port **3100** (`http://localhost:3100`).
+The compiled binaries will be generated inside the `dist_electron/` directory.
 
 ---
 
@@ -89,6 +107,8 @@ In the project directory, you can run:
 | `npm run build` | Compiles TypeScript and builds the production frontend bundle. |
 | `npm run lint` | Lints files using Oxlint for lightning-fast feedback. |
 | `npm run preview` | Previews the production build locally. |
+| `npm run electron:dev` | Starts the Electron desktop interface in development mode. |
+| `npm run electron:build` | Compiles frontend and backend, and packages a standalone desktop binary inside `dist_electron/`. |
 
 ---
 
