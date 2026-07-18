@@ -1,6 +1,54 @@
 import { javascriptGenerator, Order } from 'blockly/javascript';
 
 export function registerGenerators() {
+  // Control Blocks
+  javascriptGenerator.forBlock['control_wait'] = function (block, generator) {
+    const duration = generator.valueToCode(block, 'DURATION', Order.ATOMIC) || 0;
+    return `await new Promise(resolve => setTimeout(resolve, ${duration} * 1000));\n`;
+  };
+
+  javascriptGenerator.forBlock['control_repeat'] = function (block, generator) {
+    const times = generator.valueToCode(block, 'TIMES', Order.ATOMIC) || 0;
+    let branch = generator.statementToCode(block, 'SUBSTACK');
+    branch = generator.addLoopTrap(branch, block) || branch;
+    return `for (let i = 0; i < ${times}; i++) {\n${branch}  await new Promise(r => setTimeout(r, 16));\n}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_forever'] = function (block, generator) {
+    let branch = generator.statementToCode(block, 'SUBSTACK');
+    branch = generator.addLoopTrap(branch, block) || branch;
+    return `while (true) {\n${branch}  await new Promise(r => setTimeout(r, 16));\n}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_if'] = function (block, generator) {
+    const condition = generator.valueToCode(block, 'CONDITION', Order.NONE) || 'false';
+    const branch = generator.statementToCode(block, 'SUBSTACK');
+    return `if (${condition}) {\n${branch}}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_if_else'] = function (block, generator) {
+    const condition = generator.valueToCode(block, 'CONDITION', Order.NONE) || 'false';
+    const branch1 = generator.statementToCode(block, 'SUBSTACK');
+    const branch2 = generator.statementToCode(block, 'SUBSTACK2');
+    return `if (${condition}) {\n${branch1}} else {\n${branch2}}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_wait_until'] = function (block, generator) {
+    const condition = generator.valueToCode(block, 'CONDITION', Order.NONE) || 'false';
+    return `while (!(${condition})) {\n  await new Promise(r => setTimeout(r, 16));\n}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_repeat_until'] = function (block, generator) {
+    const condition = generator.valueToCode(block, 'CONDITION', Order.NONE) || 'false';
+    let branch = generator.statementToCode(block, 'SUBSTACK');
+    branch = generator.addLoopTrap(branch, block) || branch;
+    return `while (!(${condition})) {\n${branch}  await new Promise(r => setTimeout(r, 16));\n}\n`;
+  };
+
+  javascriptGenerator.forBlock['control_stop'] = function () {
+    return 'return;\n';
+  };
+
   javascriptGenerator.forBlock['event_whenflagclicked'] = function () {
     return "";
   };
